@@ -7,16 +7,18 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token)
 dp = Dispatcher(bot)
 users = {}
+global questions
+global users
 
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
-    await message.reply("Расставляй в порядке приоритета")
-
+    await message.answer("Введите свою фамилию")
+    bot.
 
 @dp.message_handler()
 async def xd(message: types.Message):
-    pass
+
 
 
 if __name__ == '__main__':
