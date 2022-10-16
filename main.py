@@ -1,18 +1,12 @@
 import logging
-from configs import token
+from configs import token, otvet, questions
 from aiogram import Bot, Dispatcher, executor, types
 
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token)
 dp = Dispatcher(bot)
-
-
-otvet = {
-    "А" : [],
-    "Б" : [],
-    "В" : [],
-    }
+users = {}
 
 
 @dp.message_handler(commands=['start'])
