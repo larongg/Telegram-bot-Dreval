@@ -8,6 +8,7 @@ from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
 from aiogram.utils import executor
+from answers import Answers
 
 
 logging.basicConfig(level=logging.INFO)
@@ -350,6 +351,9 @@ async def process_test1(message: types.Message, state: FSMContext):
                 md.text('Задание П:', ', '.join(list(data['test16']))),
                 md.text('Задание С:', ', '.join(list(data['test17']))),
                 md.text('Задание Т:', ', '.join(list(data['test18']))),
+                md.text(
+
+                ),
                 sep='\n',
             ),
             parse_mode=ParseMode.MARKDOWN,
