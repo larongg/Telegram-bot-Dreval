@@ -333,6 +333,7 @@ async def process_test1(message: types.Message, state: FSMContext):
                 md.text('Имя:', data['name']),
                 md.text('Фамилия:', data['surname']),
                 md.text('Группа:', data['group']),
+                md.text(),
                 md.text('Задание А:', ', '.join(list(data['test1']))),
                 md.text('Задание Б:', ', '.join(list(data['test2']))),
                 md.text('Задание В:', ', '.join(list(data['test3']))),
@@ -351,8 +352,30 @@ async def process_test1(message: types.Message, state: FSMContext):
                 md.text('Задание П:', ', '.join(list(data['test16']))),
                 md.text('Задание С:', ', '.join(list(data['test17']))),
                 md.text('Задание Т:', ', '.join(list(data['test18']))),
+                md.text(),
                 md.text(
-
+                    Answers(
+                        {
+                            'А': list(map(int, ' '.join(list(data['test1'])).split(' '))),
+                            'Б': list(map(int, ' '.join(list(data['test2'])).split(' '))),
+                            'В': list(map(int, ' '.join(list(data['test3'])).split(' '))),
+                            'Г': list(map(int, ' '.join(list(data['test4'])).split(' '))),
+                            'Д': list(map(int, ' '.join(list(data['test5'])).split(' '))),
+                            'Е': list(map(int, ' '.join(list(data['test6'])).split(' '))),
+                            'Ж': list(map(int, ' '.join(list(data['test7'])).split(' '))),
+                            'З': list(map(int, ' '.join(list(data['test8'])).split(' '))),
+                            'И': list(map(int, ' '.join(list(data['test9'])).split(' '))),
+                            'К': list(map(int, ' '.join(list(data['test10'])).split(' '))),
+                            'Л': list(map(int, ' '.join(list(data['test11'])).split(' '))),
+                            'М': list(map(int, ' '.join(list(data['test12'])).split(' '))),
+                            'Н': list(map(int, ' '.join(list(data['test13'])).split(' '))),
+                            'О': list(map(int, ' '.join(list(data['test14'])).split(' '))),
+                            'П': list(map(int, ' '.join(list(data['test15'])).split(' '))),
+                            'Р': list(map(int, ' '.join(list(data['test16'])).split(' '))),
+                            'С': list(map(int, ' '.join(list(data['test17'])).split(' '))),
+                            'Т': list(map(int, ' '.join(list(data['test18'])).split(' '))),
+                        }
+                    ).sorted()
                 ),
                 sep='\n',
             ),
