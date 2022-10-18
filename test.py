@@ -1,5 +1,5 @@
-xd = {"gf": 1, "rg": 2, "fr":3}
-print(list(xd.keys())[0])
+#xd = {"gf": 1, "rg": 2, "fr":3}
+#print(list(xd.keys())[0])
 
 
 '''        # And send message
@@ -18,4 +18,5 @@ print(list(xd.keys())[0])
     # Finish conversation
     await state.finish()'''
 
-print(list("12345"))
+#print(list("12345"))
+print(x for x in list("12345"))

@@ -4,7 +4,7 @@ import aiogram.utils.markdown as md
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
-# from aiogram.dispatcher.filters import Text
+from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
 from aiogram.utils import executor
@@ -51,7 +51,7 @@ async def cmd_start(message: types.Message):
     await bot.send_message(message.chat.id, "Имя")
 
 
-'''# You can use state '*' if you need to handle all states
+# You can use state '*' if you need to handle all states
 @dp.message_handler(state='*', commands='cancel')
 @dp.message_handler(Text(equals='cancel', ignore_case=True), state='*')
 async def cancel_handler(message: types.Message, state: FSMContext):
@@ -66,7 +66,7 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     # Cancel state and inform user about it
     await state.finish()
     # And remove keyboard (just in case)
-    await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())'''
+    await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
 
 @dp.message_handler(state=User.name)
@@ -332,24 +332,24 @@ async def process_test1(message: types.Message, state: FSMContext):
                 md.text('Имя:', data['name']),
                 md.text('Фамилия:', data['surname']),
                 md.text('Группа:', data['group']),
-                md.text('Задание А:', data['test1']),
-                md.text('Задание Б:', data['test2']),
-                md.text('Задание В:', data['test3']),
-                md.text('Задание В:', data['test4']),
-                md.text('Задание В:', data['test5']),
-                md.text('Задание Е:', data['test6']),
-                md.text('Задание Ж:', data['test7']),
-                md.text('Задание З:', data['test8']),
-                md.text('Задание И:', data['test9']),
-                md.text('Задание К:', data['test10']),
-                md.text('Задание Л:', data['test11']),
-                md.text('Задание М:', data['test12']),
-                md.text('Задание Н:', data['test13']),
-                md.text('Задание О:', data['test14']),
-                md.text('Задание П:', data['test15']),
-                md.text('Задание П:', data['test16']),
-                md.text('Задание С:', data['test17']),
-                md.text('Задание Т:', data['test18']),
+                md.text('Задание А:', ', '.join(list(data['test1']))),
+                md.text('Задание Б:', ', '.join(list(data['test2']))),
+                md.text('Задание В:', ', '.join(list(data['test3']))),
+                md.text('Задание В:', ', '.join(list(data['test4']))),
+                md.text('Задание В:', ', '.join(list(data['test5']))),
+                md.text('Задание Е:', ', '.join(list(data['test6']))),
+                md.text('Задание Ж:', ', '.join(list(data['test7']))),
+                md.text('Задание З:', ', '.join(list(data['test8']))),
+                md.text('Задание И:', ', '.join(list(data['test9']))),
+                md.text('Задание К:', ', '.join(list(data['test10']))),
+                md.text('Задание Л:', ', '.join(list(data['test11']))),
+                md.text('Задание М:', ', '.join(list(data['test12']))),
+                md.text('Задание Н:', ', '.join(list(data['test13']))),
+                md.text('Задание О:', ', '.join(list(data['test14']))),
+                md.text('Задание П:', ', '.join(list(data['test15']))),
+                md.text('Задание П:', ', '.join(list(data['test16']))),
+                md.text('Задание С:', ', '.join(list(data['test17']))),
+                md.text('Задание Т:', ', '.join(list(data['test18']))),
                 sep='\n',
             ),
             parse_mode=ParseMode.MARKDOWN,
