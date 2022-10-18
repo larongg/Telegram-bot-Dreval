@@ -17,3 +17,5 @@ print(list(xd.keys())[0])
 
     # Finish conversation
     await state.finish()'''
+
+print(list("12345"))
