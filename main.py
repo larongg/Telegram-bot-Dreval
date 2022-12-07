@@ -79,7 +79,7 @@ async def process_name(message: types.Message, state: FSMContext):
     await bot.send_message(message.chat.id, "Фамилия")
 
 
-@dp.message_handler(lambda message: not message.text.isdigit(), state=User.surname)
+@dp.message_handler(state=User.surname)
 async def process_surname(message: types.Message, state: FSMContext):
     # Update state and data
     async with state.proxy() as data:
@@ -118,6 +118,16 @@ async def process_group(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test1
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test1)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -127,6 +137,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание Б" + questions['Б']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test2
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -142,6 +162,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test3
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test3)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -151,6 +181,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание Г" + questions['Г']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test4
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -166,6 +206,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test5
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test5)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -175,6 +225,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание Е" + questions['Е']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test6
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -190,6 +250,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test7
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test7)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -199,6 +269,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание З" + questions['З']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test8
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -214,6 +294,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test9
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test9)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -223,6 +313,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание К" + questions['К']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test10
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -238,6 +338,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test11
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test11)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -247,6 +357,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание М" + questions['М']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test12
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -262,6 +382,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test13
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test13)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -271,6 +401,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание О" + questions['О']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test14
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -286,6 +426,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test15
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test15)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -295,6 +445,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание Р" + questions['Р']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test16
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
@@ -310,6 +470,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     )
 
 
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test17
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
+    )
+
+
 @dp.message_handler(state=User.test17)
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -319,6 +489,16 @@ async def process_test1(message: types.Message, state: FSMContext):
     await bot.send_message(
         message.chat.id,
         "Задание Т" + questions['Т']
+    )
+
+
+@dp.message_handler(
+    lambda message: sorted(list(message.text.split(" "))) != ["1", "2", "3", "4", "5"],
+    state=User.test18
+)
+async def process_gender_invalid(message: types.Message):
+    return await message.reply(
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
 
 
