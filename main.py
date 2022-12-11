@@ -1,5 +1,5 @@
 import logging
-from configs import token, questions
+from configs import token, questions, code
 import aiogram.utils.markdown as md
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -9,12 +9,22 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
 from aiogram.utils import executor
 from answers import Answers
+import pandas as pd
 
 
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
+excel_dreval = {
+    'ФИО': [],
+    'Группа': [],
+    'Синтетический стиль': [],
+    'Идеалистический стиль': [],
+    'Прагматический стиль': [],
+    'Аналитичесеий стиль': [],
+    'Реалистический стиль': []
+}
 
 
 class User(StatesGroup):
@@ -39,6 +49,15 @@ class User(StatesGroup):
     test16 = State()
     test17 = State()
     test18 = State()
+
+
+@dp.message_handler(commands=code)
+async def cmd_excel_print(message: types.Message):
+    pd.DataFrame(excel_dreval).to_excel('./dreval.xlsx', index=False)
+    await bot.send_document(
+        message.chat.id,
+        open('dreval.xlsx', 'rb')
+    )
 
 
 @dp.message_handler(commands='start')
@@ -506,6 +525,41 @@ async def process_gender_invalid(message: types.Message):
 async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['test18'] = list(message.text.split(" "))
+
+        excel_dreval['ФИО'].append((data['name'] + " " + data['surname']))
+        excel_dreval['Группа'].append(data['group'])
+        k = 0
+        lst = [
+            "Синтетический стиль",
+            "Идеалистический стиль",
+            "Прагматический стиль",
+            "Аналитичесеий стиль",
+            "Реалистический стиль"
+        ]
+        for res in Answers(
+            {
+                'А': list(map(int, ' '.join(list(data['test1'])).split(' '))),
+                'Б': list(map(int, ' '.join(list(data['test2'])).split(' '))),
+                'В': list(map(int, ' '.join(list(data['test3'])).split(' '))),
+                'Г': list(map(int, ' '.join(list(data['test4'])).split(' '))),
+                'Д': list(map(int, ' '.join(list(data['test5'])).split(' '))),
+                'Е': list(map(int, ' '.join(list(data['test6'])).split(' '))),
+                'Ж': list(map(int, ' '.join(list(data['test7'])).split(' '))),
+                'З': list(map(int, ' '.join(list(data['test8'])).split(' '))),
+                'И': list(map(int, ' '.join(list(data['test9'])).split(' '))),
+                'К': list(map(int, ' '.join(list(data['test10'])).split(' '))),
+                'Л': list(map(int, ' '.join(list(data['test11'])).split(' '))),
+                'М': list(map(int, ' '.join(list(data['test12'])).split(' '))),
+                'Н': list(map(int, ' '.join(list(data['test13'])).split(' '))),
+                'О': list(map(int, ' '.join(list(data['test14'])).split(' '))),
+                'П': list(map(int, ' '.join(list(data['test15'])).split(' '))),
+                'Р': list(map(int, ' '.join(list(data['test16'])).split(' '))),
+                'С': list(map(int, ' '.join(list(data['test17'])).split(' '))),
+                'Т': list(map(int, ' '.join(list(data['test18'])).split(' '))),
+            }
+        ).sorted().split('\n'):
+            excel_dreval[lst[k]].append(res.replace(lst[k] + ": ", ""))
+            k += 1
 
         await bot.send_message(
             message.chat.id,
