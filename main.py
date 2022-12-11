@@ -28,8 +28,7 @@ excel_dreval = {
 
 
 class User(StatesGroup):
-    name = State()
-    surname = State()
+    fio = State()
     group = State()
     test1 = State()
     test2 = State()
@@ -66,9 +65,9 @@ async def cmd_start(message: types.Message):
     Начало теста
     """
     # Set state
-    await User.name.set()
+    await User.fio.set()
 
-    await bot.send_message(message.chat.id, "Имя")
+    await bot.send_message(message.chat.id, "ФИО")
 
 
 # You can use state '*' if you need to handle all states
@@ -89,32 +88,14 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
 
-@dp.message_handler(state=User.name)
-async def process_name(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        data['name'] = message.text
-
-    await User.next()
-    await bot.send_message(message.chat.id, "Фамилия")
-
-
-@dp.message_handler(state=User.surname)
+@dp.message_handler(state=User.fio)
 async def process_surname(message: types.Message, state: FSMContext):
     # Update state and data
     async with state.proxy() as data:
-        data['surname'] = message.text
+        data['fio'] = message.text
     await User.next()
 
-    # Configure ReplyKeyboardMarkup
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-    markup.add("8К23", "8К24")
-
-    await bot.send_message(message.chat.id, "Группа", reply_markup=markup)
-
-
-@dp.message_handler(lambda message: message.text not in ["8К23", "8К24"], state=User.group)
-async def process_group_invalid(message: types.Message):
-    return await bot.send_message(message.chat.id, "Группа")
+    await bot.send_message(message.chat.id, "Группа")
 
 
 @dp.message_handler(state=User.group)
@@ -123,13 +104,9 @@ async def process_group(message: types.Message, state: FSMContext):
         data['group'] = message.text
     await User.next()
 
-    # Remove keyboard
-    markup = types.ReplyKeyboardRemove()
-
     await bot.send_message(
         message.chat.id,
-        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4",
-        reply_markup=markup
+        "Расставляй цифры через пробел, в порядке приоритета, что ты считаешь более важным, пример:\n3 2 5 1 4"
     )
     await bot.send_message(
         message.chat.id,
@@ -526,7 +503,7 @@ async def process_test1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['test18'] = list(message.text.split(" "))
 
-        excel_dreval['ФИО'].append((data['name'] + " " + data['surname']))
+        excel_dreval['ФИО'].append(data['fio'])
         excel_dreval['Группа'].append(data['group'])
         k = 0
         lst = [
@@ -564,29 +541,6 @@ async def process_test1(message: types.Message, state: FSMContext):
         await bot.send_message(
             message.chat.id,
             md.text(
-                md.text('Имя:', data['name']),
-                md.text('Фамилия:', data['surname']),
-                md.text('Группа:', data['group']),
-                md.text(),
-                md.text('Задание А:', ', '.join(list(data['test1']))),
-                md.text('Задание Б:', ', '.join(list(data['test2']))),
-                md.text('Задание В:', ', '.join(list(data['test3']))),
-                md.text('Задание В:', ', '.join(list(data['test4']))),
-                md.text('Задание В:', ', '.join(list(data['test5']))),
-                md.text('Задание Е:', ', '.join(list(data['test6']))),
-                md.text('Задание Ж:', ', '.join(list(data['test7']))),
-                md.text('Задание З:', ', '.join(list(data['test8']))),
-                md.text('Задание И:', ', '.join(list(data['test9']))),
-                md.text('Задание К:', ', '.join(list(data['test10']))),
-                md.text('Задание Л:', ', '.join(list(data['test11']))),
-                md.text('Задание М:', ', '.join(list(data['test12']))),
-                md.text('Задание Н:', ', '.join(list(data['test13']))),
-                md.text('Задание О:', ', '.join(list(data['test14']))),
-                md.text('Задание П:', ', '.join(list(data['test15']))),
-                md.text('Задание П:', ', '.join(list(data['test16']))),
-                md.text('Задание С:', ', '.join(list(data['test17']))),
-                md.text('Задание Т:', ', '.join(list(data['test18']))),
-                md.text(),
                 md.text(
                     Answers(
                         {
